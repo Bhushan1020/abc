@@ -9,6 +9,7 @@ contract MarksManagementSys
         string lname;
         int marks;
     }
+    
     address owner;
     int public stdCount = 0;
     mapping(int=>Student) public stdRecords;
@@ -17,6 +18,9 @@ contract MarksManagementSys
         require(owner==msg.sender);
         _;
     }
+
+
+
     constructor()
     {
         owner = msg.sender;
@@ -28,8 +32,8 @@ contract MarksManagementSys
         stdRecords[stdCount] = Student(_ID,_fname,_lname,_marks);
     }
     
-    function bonusMarks(int _bonus) public onlyOwner
+    function bonusMarks(int _ID,int _bonus) public onlyOwner
     {
-        stdRecords[stdCount].marks + _bonus;
+        stdRecords[_ID].marks += _bonus;
     }
 }
